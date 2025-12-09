@@ -213,6 +213,16 @@ view: dm_survey_responses {
     sql: 1.0 * ${n_promoters} / NULLIF(${n_responses}, 0) ;;
     value_format_name: percent_1
   }
+
+  measure: satisfaction_rate_yoy {
+    label: "Satisfaction Rate YoY"
+    type: period_over_period
+    kind: relative_change
+    based_on: satisfaction_rate
+    based_on_time: responded_raw
+    period: year
+    value_format_name: percent_1
+  }
 }
 
 view: dm_survey_responses__usage_scenes {
@@ -241,6 +251,16 @@ view: dm_survey_responses__purchased_products {
   measure: n_purchased_products {
     type: count
     description: "Total count of purchased products."
+  }
+
+  measure: n_purchased_products_yoy {
+    label: "N Purchased Products YoY"
+    type: period_over_period
+    kind: relative_change
+    based_on: n_purchased_products
+    based_on_time: dm_survey_responses.responded_raw
+    period: year
+    value_format_name: percent_1
   }
 }
 
