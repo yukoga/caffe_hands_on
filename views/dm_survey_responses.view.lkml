@@ -203,6 +203,12 @@ view: dm_survey_responses__purchased_products {
     sql: dm_survey_responses__purchased_products ;;
   }
 
+  dimension: pk {
+    primary_key: yes
+    hidden: yes
+    sql: CONCAT(CAST(${dm_survey_responses.response_id} AS STRING), ${dm_survey_responses__purchased_products}) ;;
+  }
+
   measure: n_purchased_products {
     type: count
     description: "Total count of purchased products."
