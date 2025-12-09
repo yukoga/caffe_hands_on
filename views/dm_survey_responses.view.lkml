@@ -219,7 +219,7 @@ view: dm_survey_responses {
     type: period_over_period
     kind: relative_change
     based_on: satisfaction_rate
-    based_on_time: responded_raw
+    based_on_time: responded_date
     period: year
     value_format_name: percent_1
   }
@@ -258,7 +258,7 @@ view: dm_survey_responses__purchased_products {
     type: period_over_period
     kind: relative_change
     based_on: n_purchased_products
-    based_on_time: dm_survey_responses.responded_raw
+    based_on_time: dm_survey_responses.responded_date
     period: year
     value_format_name: percent_1
   }
