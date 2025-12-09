@@ -5,6 +5,12 @@ view: dm_survey_responses {
     hidden: yes
     sql: ${TABLE}.atmosphere_improvement_points ;;
   }
+  dimension: answer_categories {
+    type: string
+    description: "Merged category from survey or comment analysis."
+    sql: COALESCE(${categories}, ${comment_analysis.comment_categories}, '該当カテゴリなし') ;;
+  }
+
   dimension: categories {
     type: string
     description: "Main categories related to the survey."
