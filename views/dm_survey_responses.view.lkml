@@ -35,6 +35,17 @@ view: dm_survey_responses {
     description: "Boolean flag (1/0) indicating if the customer is a Promoter."
     sql: ${TABLE}.is_promoter ;;
   }
+
+  dimension: is_valid_response {
+    type: number
+    description: "Flag (1/0) indicating a valid response (non-null key fields)."
+    sql: CASE WHEN ${response_id} IS NOT NULL
+               AND ${purchased_products} IS NOT NULL
+               AND ${sales_group} IS NOT NULL
+               AND ${store_name} IS NOT NULL
+               AND ${store_code} IS NOT NULL
+              THEN 1 ELSE 0 END ;;
+  }
   dimension: nps_score {
     type: number
     description: "Net Promoter Score (0-10)."
@@ -140,6 +151,33 @@ view: dm_survey_responses {
     type: count
     drill_fields: [store_name]
   }
+
+  measure: n_responses {
+    type: count_distinct
+    description: "Distinct count of Response IDs."
+    sql: ${response_id} ;;
+  }
+
+  measure: n_valid_responses {
+    type: count_distinct
+    description: "Distinct count of Response IDs for valid responses."
+    sql: ${response_id} ;;
+    filters: [is_valid_response: "1"]
+  }
+
+  measure: average_nps_score {
+    type: average
+    description: "Average NPS Score for valid responses."
+    sql: ${nps_score} ;;
+    filters: [is_valid_response: "1"]
+  }
+
+  measure: n_satisfaction {
+    type: count_distinct
+    description: "Count of satisfied customers (Satisfied or Very Satisfied)."
+    sql: ${response_id} ;;
+    filters: [overall_satisfaction: "満足, とても満足"]
+  }
 }
 
 view: dm_survey_responses__usage_scenes {
@@ -157,6 +195,12 @@ view: dm_survey_responses__purchased_products {
     type: string
     description: "Products purchased by the customer."
     sql: dm_survey_responses__purchased_products ;;
+  }
+
+  measure: n_purchased_products {
+    type: count_distinct
+    description: "Distinct count of purchased products."
+    sql: ${dm_survey_responses__purchased_products} ;;
   }
 }
 
