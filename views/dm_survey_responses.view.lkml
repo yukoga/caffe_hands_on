@@ -199,6 +199,20 @@ view: dm_survey_responses {
     sql: 1.0 * ${n_satisfaction} / NULLIF(${n_responses}, 0) ;;
     value_format_name: percent_1
   }
+
+  measure: n_promoters {
+    type: count_distinct
+    description: "Count of Promoter customers."
+    sql: ${response_id} ;;
+    filters: [nps_segment: "Promoter"]
+  }
+
+  measure: nps_promoter_ratio {
+    type: number
+    description: "Ratio of Promoters against total responses."
+    sql: 1.0 * ${n_promoters} / NULLIF(${n_responses}, 0) ;;
+    value_format_name: percent_1
+  }
 }
 
 view: dm_survey_responses__usage_scenes {
