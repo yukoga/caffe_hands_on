@@ -184,6 +184,20 @@ view: dm_survey_responses {
     sql: ${response_id} ;;
     filters: [overall_satisfaction: "満足, とても満足"]
   }
+
+  measure: valid_response_rate {
+    type: number
+    description: "Rate of valid responses against total responses."
+    sql: 1.0 * ${n_valid_responses} / NULLIF(${n_responses}, 0) ;;
+    value_format_name: percent_1
+  }
+
+  measure: satisfaction_rate {
+    type: number
+    description: "Rate of satisfied customers against total responses."
+    sql: 1.0 * ${n_satisfaction} / NULLIF(${n_responses}, 0) ;;
+    value_format_name: percent_1
+  }
 }
 
 view: dm_survey_responses__usage_scenes {
