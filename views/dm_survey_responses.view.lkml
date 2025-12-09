@@ -204,9 +204,8 @@ view: dm_survey_responses__purchased_products {
   }
 
   measure: n_purchased_products {
-    type: count_distinct
-    description: "Distinct count of purchased products."
-    sql: ${dm_survey_responses__purchased_products} ;;
+    type: count
+    description: "Total count of purchased products."
   }
 }
 
