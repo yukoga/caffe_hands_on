@@ -87,6 +87,7 @@ view: dm_survey_responses {
     sql: ${TABLE}.responded_at ;;
   }
   dimension: response_id {
+    primary_key: yes
     type: number
     description: "Unique identifier for each survey response."
     sql: ${TABLE}.response_id ;;
