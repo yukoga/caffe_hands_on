@@ -1,4 +1,5 @@
 view: dm_survey_responses {
+  view_label: "Survey Responses"
   sql_table_name: `yukoga-sandbox-001.bq_hands_on.dm_survey_responses` ;;
 
   dimension: atmosphere_improvement_points {

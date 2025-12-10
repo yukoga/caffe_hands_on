@@ -11,6 +11,9 @@ datagroup: caffe_hands_on_default_datagroup {
 persist_with: caffe_hands_on_default_datagroup
 
 explore: dm_survey_responses {
+  label: "Customer Survey Analysis"
+  description: "This Explore contains customer survey data including NPS scores, satisfaction ratings, purchase history, and comments. Use this to analyze customer feedback and store performance."
+
   join: dm_survey_responses__usage_scenes {
     view_label: "Dm Survey Responses: Usage Scenes"
     sql: LEFT JOIN UNNEST(${dm_survey_responses.usage_scenes}) as dm_survey_responses__usage_scenes ;;
